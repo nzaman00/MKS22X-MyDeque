@@ -17,10 +17,20 @@ public class MyDeque<E>{
     return size;
     }
   //public String toString(){ }
-  //public void addFirst(E element){ }
+  public void addFirst(E element){
+    if (size == 0){
+      size = 1;
+      start = 0;
+      end = 0;
+      data[start]= element;
+    }
+    size++;
+    end++;
+    data[start]= element;
+  }
   //public void addLast(E element){ }
-  //public E removeFirst(E element){ }
-  //public E removeLast(E element){ }
+ // public E removeFirst(E element){ }
+ // public E removeLast(E element){ }
   //public E getFirst(E element){ }
   //public E getLast(E element){ }
 }
