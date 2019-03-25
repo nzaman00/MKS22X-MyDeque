@@ -28,9 +28,9 @@ public class MyDeque<E>{
     }
     return output + "}";
   }
-  
+
   public void addFirst(E element){
-    if (element == null) throw new NullPointerException("exception from addFirst");
+    if (element == null) throw new NullPointerException("error in addFirst");
     if (size == data.length) resize();
     if (size != 0){
       if (start == 0) start = data.length - 1;
@@ -41,7 +41,7 @@ public class MyDeque<E>{
   }
 
   public void addLast(E element){
-    if (element == null) throw new NullPointerException("exception from addLast");
+    if (element == null) throw new NullPointerException("error in addLast");
     if (size == data.length) resize();
     if (size != 0){
       if (end == data.length - 1) end = 0;
@@ -50,5 +50,51 @@ public class MyDeque<E>{
     data[end] = element;
     size++;
   }
-  
+
+  public E removeFirst(){
+    if (size() == 0) throw new NoSuchElementException("error in removeFirst");
+    E temp = data[start];
+    data[start] = null;
+    if (size != 1){
+      if (start == data.length - 1) start = 0;
+      else start++;
+    }
+    size--;
+    return temp;
+  }
+
+  public E removeLast(){
+    if (size() == 0) throw new NoSuchElementException("error in removeLast");
+    E temp = data[end];
+    data[end] = null;
+    if (size != 1){
+      if (end == 0) end = data.length - 1;
+      else end--;
+    }
+    size--;
+    return temp;
+  }
+
+  public E getFirst(){
+    if (size() == 0) throw new NoSuchElementException("error in getFirst");
+    return data[start];
+  }
+
+  public E getLast(){
+    if (size() == 0) throw new NoSuchElementException("error in getLast");
+    return data[end];
+  }
+
+  @SuppressWarnings("unchecked")
+  private void resize(){
+    E[] temp = (E[]) new Object[size() * 2 + 1];
+    int index = start;
+    for (int i = 0; i < size; i++){
+      temp[i] = data[index % data.length];
+      index++;
+    }
+    start = 0;
+    end = size - 1;
+    data = temp;
+  }
 }
